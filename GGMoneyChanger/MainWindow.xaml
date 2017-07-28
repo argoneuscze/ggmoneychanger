@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GGMoneyChanger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="GGXrdRev2 Money Changer" Height="110" Width="250">
+    <StackPanel Margin="10">
+        <TextBox></TextBox>
+        <Button Width="50">Apply</Button>
+    </StackPanel>
 </Window>
