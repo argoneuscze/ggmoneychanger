@@ -35,7 +35,7 @@ namespace GGMoneyChanger
             }
             catch (FormatException)
             {
-                Console.Out.WriteLine("Invalid value.");
+                MessageBox.Show("Invalid value.");
             }
         }
 
