@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GGMoneyChanger"
         mc:Ignorable="d"
-        Title="GGXrdRev2 Money Changer" Height="110" Width="250">
-    <StackPanel Margin="10">
-        <TextBox Name="MoneyValue" PreviewTextInput="NumberValidationTextBox"></TextBox>
-        <Button Click="ButtonBase_OnClick">
+        Title="GGXrdRev2 MoneyChanger v0.1" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+        <Label Padding="0,0,4,0">Money</Label>
+        <TextBox Width="150" Height="20" Name="MoneyValue" PreviewTextInput="NumberValidationTextBox"></TextBox>
+        <Button Margin="10,0,0,0" Click="ButtonBase_OnClick" Height="20" Padding="4,0,4,0">
             <Button.Content>Apply</Button.Content>
         </Button>
     </StackPanel>
