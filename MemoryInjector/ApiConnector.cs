@@ -25,8 +25,8 @@ namespace MemoryInjector
         }
 
         private static ProcessAccessFlags neededFlags = ProcessAccessFlags.VirtualMemoryOperation
-                                                  | ProcessAccessFlags.VirtualMemoryRead
-                                                  | ProcessAccessFlags.VirtualMemoryWrite;
+                                                        | ProcessAccessFlags.VirtualMemoryRead
+                                                        | ProcessAccessFlags.VirtualMemoryWrite;
 
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
@@ -41,7 +41,27 @@ namespace MemoryInjector
 
         public static IntPtr GetProcessHandle(string name)
         {
-            OpenProcess(neededFlags, false, );
+            Process[] proc = Process.GetProcessesByName(name);
+            try
+            {
+                int procId = proc[0].Id;
+                return OpenProcess(neededFlags, false, procId);
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                throw new IndexOutOfRangeException("Process not found.", e);
+            }
+        }
+
+        public static void CloseProcess(IntPtr handle)
+        {
+            CloseHandle(handle);
+        }
+
+        public static void WriteData(IntPtr handle, IntPtr pointer, byte[] data)
+        {
+            UIntPtr bytesWritten;
+            WriteProcessMemory(handle, pointer, data, (uint) data.Length, out bytesWritten);
         }
     }
 }

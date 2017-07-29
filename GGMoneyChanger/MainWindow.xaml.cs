@@ -11,15 +11,15 @@ namespace GGMoneyChanger
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Regex numRegex;
-        private readonly MemoryHandler memoryHandler;
+        private readonly Regex _numRegex;
+        private readonly MemoryHandler _memoryHandler;
 
-        private static IntPtr xrdPointer = new IntPtr(0x1AD1228);
+        private static IntPtr xrdPointer = new IntPtr(0x02D91228);
 
         public MainWindow()
         {
-            numRegex = new Regex(@"^[0-9]+$");
-            memoryHandler = new MemoryHandler();
+            _numRegex = new Regex(@"^[0-9]+$");
+            _memoryHandler = new MemoryHandler();
 
             InitializeComponent();
         }
@@ -40,13 +40,21 @@ namespace GGMoneyChanger
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !numRegex.IsMatch(e.Text);
+            e.Handled = !_numRegex.IsMatch(e.Text);
         }
 
         private void WriteMoneyValue(int value)
         {
-            memoryHandler.OpenProcess("GuiltyGearXrd.exe");
-            memoryHandler.CloseProcess();
+            try
+            {
+                _memoryHandler.OpenProcess("GuiltyGearXrd");
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.Out.WriteLine("Process not found.");
+            }
+            _memoryHandler.WriteInt32(xrdPointer, value);
+            _memoryHandler.CloseProcess();
         }
     }
 }
