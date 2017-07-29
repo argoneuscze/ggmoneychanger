@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
-namespace MemoryManager
+namespace MemoryInjector
 {
     public class ApiConnector
     {
         [Flags]
-        public enum ProcessAccessFlags : uint
+        private enum ProcessAccessFlags : uint
         {
             All = 0x001F0FFF,
             Terminate = 0x00000001,
@@ -23,14 +24,24 @@ namespace MemoryManager
             Synchronize = 0x00100000
         }
 
+        private static ProcessAccessFlags neededFlags = ProcessAccessFlags.VirtualMemoryOperation
+                                                  | ProcessAccessFlags.VirtualMemoryRead
+                                                  | ProcessAccessFlags.VirtualMemoryWrite;
+
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, uint nSize, out UIntPtr lpNumberOfBytesWritten);
+        private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer,
+            uint nSize, out UIntPtr lpNumberOfBytesWritten);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool CloseHandle(IntPtr hObject);
+
+        public static IntPtr GetProcessHandle(string name)
+        {
+            OpenProcess(neededFlags, false, );
+        }
     }
 }

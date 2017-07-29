@@ -1,19 +1,16 @@
 ﻿using System;
 
-namespace MemoryManager
+namespace MemoryInjector
 {
     public class MemoryHandler
     {
-        private ApiConnector connector;
-
         public MemoryHandler()
         {
-            this.connector = new ApiConnector();
         }
 
         public void OpenProcess(string processName)
-        {
-
+        { 
+            
         }
 
         public void WriteToProcess(IntPtr pointer, byte[] data)

@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
-using MemoryManager;
+using MemoryInjector;
 
 namespace GGMoneyChanger
 {
@@ -11,13 +11,15 @@ namespace GGMoneyChanger
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Regex NumRegex;
-        private MemoryHandler MemoryHandler;
+        private readonly Regex numRegex;
+        private readonly MemoryHandler memoryHandler;
+
+        private static IntPtr xrdPointer = new IntPtr(0x1AD1228);
 
         public MainWindow()
         {
-            NumRegex = new Regex(@"^[0-9]+$");
-            MemoryHandler = new MemoryHandler();
+            numRegex = new Regex(@"^[0-9]+$");
+            memoryHandler = new MemoryHandler();
 
             InitializeComponent();
         }
@@ -38,13 +40,13 @@ namespace GGMoneyChanger
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !NumRegex.IsMatch(e.Text);
+            e.Handled = !numRegex.IsMatch(e.Text);
         }
 
         private void WriteMoneyValue(int value)
         {
-            MemoryHandler.OpenProcess("GuiltyGearXrd.exe");
-            MemoryHandler.CloseProcess();
+            memoryHandler.OpenProcess("GuiltyGearXrd.exe");
+            memoryHandler.CloseProcess();
         }
     }
 }

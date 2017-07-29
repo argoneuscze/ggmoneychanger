@@ -94,9 +94,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MemoryManager\MemoryManager.csproj">
-      <Project>{53e616df-7448-4162-a088-f1c2ac2ad4ae}</Project>
-      <Name>MemoryManager</Name>
+    <ProjectReference Include="..\MemoryInjector\MemoryInjector.csproj">
+      <Project>{0b6e3277-f96a-4c10-b092-c5023b55f8a4}</Project>
+      <Name>MemoryInjector</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

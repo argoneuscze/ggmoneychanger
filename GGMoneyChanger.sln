@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GGMoneyChanger", "GGMoneyChanger\GGMoneyChanger.csproj", "{4AB8CBF4-D447-4BD4-B3EA-CCCC7687234C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryManager", "MemoryManager\MemoryManager.csproj", "{53E616DF-7448-4162-A088-F1C2AC2AD4AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryInjector", "MemoryInjector\MemoryInjector.csproj", "{0B6E3277-F96A-4C10-B092-C5023B55F8A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{4AB8CBF4-D447-4BD4-B3EA-CCCC7687234C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AB8CBF4-D447-4BD4-B3EA-CCCC7687234C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AB8CBF4-D447-4BD4-B3EA-CCCC7687234C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53E616DF-7448-4162-A088-F1C2AC2AD4AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53E616DF-7448-4162-A088-F1C2AC2AD4AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53E616DF-7448-4162-A088-F1C2AC2AD4AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53E616DF-7448-4162-A088-F1C2AC2AD4AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B6E3277-F96A-4C10-B092-C5023B55F8A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6E3277-F96A-4C10-B092-C5023B55F8A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6E3277-F96A-4C10-B092-C5023B55F8A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6E3277-F96A-4C10-B092-C5023B55F8A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
