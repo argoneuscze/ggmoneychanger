@@ -32,6 +32,11 @@ namespace MemoryInjector
         private static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
 
         [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, [Out] byte[] lpBuffer,
+            int dwSize,
+            out IntPtr lpNumberOfBytesRead);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer,
             uint nSize, out UIntPtr lpNumberOfBytesWritten);
 
@@ -39,13 +44,14 @@ namespace MemoryInjector
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool CloseHandle(IntPtr hObject);
 
-        public static IntPtr GetProcessHandle(string name)
+        public static Tuple<IntPtr, IntPtr> GetProcessHandle(string name)
         {
             Process[] proc = Process.GetProcessesByName(name);
             try
             {
                 int procId = proc[0].Id;
-                return OpenProcess(neededFlags, false, procId);
+                IntPtr baseAddr = proc[0].MainModule.BaseAddress;
+                return Tuple.Create(OpenProcess(neededFlags, false, procId), baseAddr);
             }
             catch (IndexOutOfRangeException e)
             {
@@ -62,6 +68,15 @@ namespace MemoryInjector
         {
             UIntPtr bytesWritten;
             WriteProcessMemory(handle, pointer, data, (uint) data.Length, out bytesWritten);
+        }
+
+        public static IntPtr ResolvePointer(IntPtr handle, IntPtr pointer)
+        {
+            byte[] readPointer = new byte[4];
+            IntPtr bytesRead;
+            ReadProcessMemory(handle, pointer, readPointer, 4, out bytesRead);
+            IntPtr newPointer = new IntPtr(BitConverter.ToInt32(readPointer, 0));
+            return newPointer;
         }
     }
 }

@@ -4,33 +4,37 @@ namespace MemoryInjector
 {
     public class MemoryHandler
     {
-        private IntPtr _procPointer;
+        private IntPtr _procHandle;
+        private IntPtr _procBaseAddress;
 
         public MemoryHandler()
         {
-            _procPointer = IntPtr.Zero;
+            _procHandle = IntPtr.Zero;
         }
 
         public void OpenProcess(string processName)
         {
-            _procPointer = ApiConnector.GetProcessHandle(processName);
+            var result = ApiConnector.GetProcessHandle(processName);
+            _procHandle = result.Item1;
+            _procBaseAddress = result.Item2;
         }
 
-        public void WriteInt32(IntPtr pointer, Int32 value)
+        public void WriteInt32Ptr(IntPtr pointer, Int32 value)
         {
-            if (_procPointer != IntPtr.Zero)
+            if (_procHandle != IntPtr.Zero)
             {
                 byte[] data = BitConverter.GetBytes(value);
-                ApiConnector.WriteData(_procPointer, pointer, data);
+                IntPtr valPointer = IntPtr.Add(_procBaseAddress, pointer.ToInt32());
+                ApiConnector.WriteData(_procHandle, valPointer, data);
             }
         }
 
         public void CloseProcess()
         {
-            if (_procPointer != IntPtr.Zero)
+            if (_procHandle != IntPtr.Zero)
             {
-                ApiConnector.CloseProcess(_procPointer);
-                _procPointer = IntPtr.Zero;
+                ApiConnector.CloseProcess(_procHandle);
+                _procHandle = IntPtr.Zero;
             }
         }
     }

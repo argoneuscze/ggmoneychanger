@@ -14,7 +14,8 @@ namespace GGMoneyChanger
         private readonly Regex _numRegex;
         private readonly MemoryHandler _memoryHandler;
 
-        private static IntPtr xrdPointer = new IntPtr(0x02D91228);
+        private static IntPtr xrdPointer1 = new IntPtr(0x1AD1228);
+        private static IntPtr xrdPointer2 = new IntPtr(0x1BD7310);
 
         public MainWindow()
         {
@@ -53,7 +54,8 @@ namespace GGMoneyChanger
             {
                 Console.Out.WriteLine("Process not found.");
             }
-            _memoryHandler.WriteInt32(xrdPointer, value);
+            _memoryHandler.WriteInt32Ptr(xrdPointer1, value);
+            _memoryHandler.WriteInt32Ptr(xrdPointer2, value);
             _memoryHandler.CloseProcess();
         }
     }
