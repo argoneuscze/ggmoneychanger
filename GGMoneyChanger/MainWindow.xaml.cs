@@ -37,6 +37,10 @@ namespace GGMoneyChanger
             {
                 MessageBox.Show("Invalid value.");
             }
+            catch (OverflowException)
+            {
+                MessageBox.Show("Value is too large.");
+            }
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
