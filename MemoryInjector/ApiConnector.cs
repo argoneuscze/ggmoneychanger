@@ -47,16 +47,9 @@ namespace MemoryInjector
         public static Tuple<IntPtr, IntPtr> GetProcessHandle(string name)
         {
             Process[] proc = Process.GetProcessesByName(name);
-            try
-            {
-                int procId = proc[0].Id;
-                IntPtr baseAddr = proc[0].MainModule.BaseAddress;
-                return Tuple.Create(OpenProcess(neededFlags, false, procId), baseAddr);
-            }
-            catch (IndexOutOfRangeException e)
-            {
-                throw new IndexOutOfRangeException("Process not found.", e);
-            }
+            int procId = proc[0].Id;
+            IntPtr baseAddr = proc[0].MainModule.BaseAddress;
+            return Tuple.Create(OpenProcess(neededFlags, false, procId), baseAddr);
         }
 
         public static void CloseProcess(IntPtr handle)

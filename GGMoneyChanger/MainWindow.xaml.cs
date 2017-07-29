@@ -14,8 +14,8 @@ namespace GGMoneyChanger
         private readonly Regex _numRegex;
         private readonly MemoryHandler _memoryHandler;
 
-        private static IntPtr xrdPointer1 = new IntPtr(0x1AD1228);
-        private static IntPtr xrdPointer2 = new IntPtr(0x1BD7310);
+        private static readonly IntPtr XrdPointer1 = new IntPtr(0x1AD1228);
+        private static readonly IntPtr XrdPointer2 = new IntPtr(0x1BD7310);
 
         public MainWindow()
         {
@@ -52,11 +52,13 @@ namespace GGMoneyChanger
             }
             catch (IndexOutOfRangeException)
             {
-                Console.Out.WriteLine("Process not found.");
+                MessageBox.Show("The game isn't running.");
+                return;
             }
-            _memoryHandler.WriteInt32Ptr(xrdPointer1, value);
-            _memoryHandler.WriteInt32Ptr(xrdPointer2, value);
+            _memoryHandler.WriteInt32Ptr(XrdPointer1, value);
+            _memoryHandler.WriteInt32Ptr(XrdPointer2, value);
             _memoryHandler.CloseProcess();
+            MessageBox.Show("Successfully changed money.");
         }
     }
 }
