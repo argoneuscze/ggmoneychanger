@@ -93,5 +93,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MemoryManager\MemoryManager.csproj">
+      <Project>{53e616df-7448-4162-a088-f1c2ac2ad4ae}</Project>
+      <Name>MemoryManager</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

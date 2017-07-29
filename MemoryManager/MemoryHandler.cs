@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MemoryManager
 {
-    class MemoryHandler
+    public class MemoryHandler
     {
         private ApiConnector connector;
 
@@ -15,9 +13,14 @@ namespace MemoryManager
 
         public void OpenProcess(string processName)
         {
+
         }
 
         public void WriteToProcess(IntPtr pointer, byte[] data)
+        {
+        }
+
+        public void CloseProcess()
         {
         }
     }

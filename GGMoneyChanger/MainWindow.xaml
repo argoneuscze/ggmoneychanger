@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="GGXrdRev2 Money Changer" Height="110" Width="250">
     <StackPanel Margin="10">
-        <TextBox></TextBox>
-        <Button Width="50">Apply</Button>
+        <TextBox Name="MoneyValue" PreviewTextInput="NumberValidationTextBox"></TextBox>
+        <Button Click="ButtonBase_OnClick">
+            <Button.Content>Apply</Button.Content>
+        </Button>
     </StackPanel>
 </Window>
